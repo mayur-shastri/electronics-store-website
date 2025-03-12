@@ -23,9 +23,13 @@ const corsConfig = {
   credentials: true,
   origin: FRONTEND_URL,
   sameSite: "none",
-  secure: true,
+  // secure: true, // uncomment in when using HTTPS
 };
 app.use(cors(corsConfig));
+
+app.get('/', (req, res) => {
+  res.json({message : "Hello World"});
+})
 
 app.use("/api", routes);
 
