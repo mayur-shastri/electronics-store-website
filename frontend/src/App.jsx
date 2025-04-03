@@ -1,13 +1,13 @@
 import HomeView from "./views/HomeView";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NavBar from "@/components/NavBar/NavBar";
-import ShopFooter from "@/components/Footer/ShopFooter";
+import NavBar from "./components/NavBar/NavBar";
+import ShopFooter from "./components/Footer/ShopFooter";
 import ErrorView from "./views/ErrorView";
 import CartView from "./views/CartView";
 import DeliveryView from "./views/DeliveryView";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useEffect } from "react";
-import { useGlobalContext } from "@/components/GlobalContext/GlobalContext";
+import { useGlobalContext } from "./components/GlobalContext/GlobalContext";
 import { ToastContainer} from "react-toastify";
 import Modal from "./components/Modals/Modal";
 import CancelOrder from "./components/Modals/CancelOrder";
