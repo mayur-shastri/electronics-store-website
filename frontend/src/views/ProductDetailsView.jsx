@@ -134,6 +134,11 @@ const ProductDetailsView = () => {
                     <div className="main-image">
                         <img src={product.product_image} alt={product.name} />
                     </div>
+                    {product.tags && (
+                        <div className="product-tags">
+                            <h3>Tags :  {product.tags}</h3>
+                        </div>
+                    )}
                 </div>
 
                 <div className="product-info">
@@ -141,9 +146,6 @@ const ProductDetailsView = () => {
 
                     <div className="price-rating">
                         <span className="price">${product.price.toFixed(2)}</span>
-                        {/* {product.price_before && (
-                            <span className="price-before">${product.price_before.toFixed(2)}</span>
-                        )} */}
                         <div className="rating">
                             {[...Array(5)].map((_, i) => (
                                 <FaStar
@@ -156,12 +158,6 @@ const ProductDetailsView = () => {
                     </div>
 
                     <p className="description">{product.description}</p>
-                    {product.tags && (
-                        <div className="product-tags">
-                            <h3>Tags</h3>
-                            <p>{product.tags}</p>
-                        </div>
-                    )}
 
                     <div className="action-buttons">
                         {isInCart ? (
