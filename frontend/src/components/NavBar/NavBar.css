@@ -10,8 +10,9 @@
   align-items: center;
   min-height: 5rem;
   color: white;
-  background-color: #7c26fe;
+  background-color: #6520cb;
   padding-right: 1rem;
+  border-radius: 1rem;
 }
 
 .links,
