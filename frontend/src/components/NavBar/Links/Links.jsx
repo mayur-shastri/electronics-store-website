@@ -18,7 +18,7 @@ const Links = () => {
   return (
     <div className="links">
       <Link to={"/"} onClick={removeExpandedClass}>
-        Deals
+        Home
       </Link>
       <Link to={"/#products"} onClick={scrollToProducts}>
         What's New

@@ -5,27 +5,29 @@ import { useGlobalContext } from "@/components/GlobalContext/GlobalContext";
 import { memo } from "react";
 import Skeleton from "react-loading-skeleton";
 
-
 const Products = () => {
-  let {store} = useGlobalContext();
-  let sortedProducts = store.state.products
-    .slice()
+  const { store } = useGlobalContext();
+
+  const featuredProducts = store.state.products
+    .filter((product) => product.isFeatured)
     .sort((a, b) => a.name.localeCompare(b.name));
+
   return (
     <div className="sub-container" id="products">
       <h2>Latest Deals</h2>
-      {store.state.products.length > 0 ? (
+      {featuredProducts.length > 0 ? (
         <div className="contains-product">
-          {sortedProducts.map((product) => (
+          {featuredProducts.map((product) => (
             <Product key={product._id} product={product} />
           ))}
         </div>
       ) : (
         <div className="skeleton">
-          <Skeleton height={250}></Skeleton>
+          <Skeleton height={250} />
         </div>
       )}
     </div>
   );
 };
+
 export default memo(Products);

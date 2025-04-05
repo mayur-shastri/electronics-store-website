@@ -5,29 +5,29 @@ import { useGlobalContext } from "@/components/GlobalContext/GlobalContext";
 import Skeleton from "react-loading-skeleton";
 
 const TopProducts = () => {
-  let {store} = useGlobalContext();
-  // return from highest to lowest using times_bought
+  const { store } = useGlobalContext();
 
-  let topProducts = store.state.products.sort(
-    (a, b) => b.times_bought - a.times_bought
-  );
+  // Filter products marked as top, and sort by times_bought descending
+  const topProducts = store.state.products
+    .filter((product) => product.isTopProduct)
+    .sort((a, b) => b.times_bought - a.times_bought);
+
   return (
     <div className="sub-container">
       <h2>Top Sellers!</h2>
-      <div className="contains-product">
-        {store.state.products.length > 0 ? (
-          <div className="contains-product">
-            {topProducts.map((product) => {
-              return <Product key={product._id} product={product}></Product>;
-            })}
-          </div>
-        ) : (
-          <div className="skeleton">
-            <Skeleton height={250}></Skeleton>
-          </div>
-        )}
-      </div>
+      {store.state.products.length > 0 ? (
+        <div className="contains-product">
+          {topProducts.map((product) => (
+            <Product key={product._id} product={product} />
+          ))}
+        </div>
+      ) : (
+        <div className="skeleton">
+          <Skeleton height={250} />
+        </div>
+      )}
     </div>
   );
 };
+
 export default TopProducts;

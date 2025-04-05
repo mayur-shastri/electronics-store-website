@@ -10,7 +10,7 @@ const Banner = () => {
             Grab Upto 50% Off On <br></br>Many Deals
           </h1>
           <span className="is-buy-now">
-            <a href="#products">
+            <a href="#deals">
               <button className="btn-rounded buy-now">Buy Now</button>
             </a>
           </span>

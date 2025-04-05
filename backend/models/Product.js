@@ -51,6 +51,18 @@ const productSchema = new mongoose.Schema({
   tags: {
     type: String,
   },
+  isDeal: {
+    type: Boolean,
+    default: false,
+  },
+  isTopProduct: {
+    type: Boolean,
+    default: false,
+  },
+  isFeatured: {
+    type: Boolean,
+    default: false,
+  },
   reviews: [reviewSchema]
 });
 
@@ -60,12 +72,12 @@ productSchema.pre("save", function (next) {
 });
 
 // Method to update rating when new review is added
-productSchema.methods.updateRating = function() {
+productSchema.methods.updateRating = function () {
   if (this.reviews.length === 0) {
     this.rating = 0;
     return;
   }
-  
+
   const sum = this.reviews.reduce((acc, review) => acc + review.rating, 0);
   this.rating = sum / this.reviews.length;
 };

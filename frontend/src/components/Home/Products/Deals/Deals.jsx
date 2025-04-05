@@ -4,24 +4,28 @@ import { useGlobalContext } from "@/components/GlobalContext/GlobalContext";
 import Skeleton from "react-loading-skeleton";
 
 const Deals = () => {
-  let {store} = useGlobalContext();
+  const { store } = useGlobalContext();
 
-  let cheapest = store.state.products.sort((a, b) => a.price - b.price);
+  const dealProducts = store.state.products.filter((product) => {
+    return product.isDeal;
+  });
+
   return (
-    <div className="sub-container">
+    <div className="sub-container" id="deals">
       <h2>Deals Just For You!</h2>
       {store.state.products.length > 0 ? (
         <div className="contains-product">
-          {cheapest.map((product) => {
-            return <Product key={product._id} product={product}></Product>;
-          })}
+          {dealProducts.map((product) => (
+            <Product key={product._id} product={product} />
+          ))}
         </div>
       ) : (
         <div className="skeleton">
-          <Skeleton height={250}></Skeleton>
+          <Skeleton height={250} />
         </div>
       )}
     </div>
   );
 };
+
 export default Deals;
