@@ -10,15 +10,19 @@ const DeliveryView = () => {
   const { orders, auth, modal } = useGlobalContext();
   const [loadingOrders, setLoadingOrders] = useState(false);
   const [disabled, setDisabled] = useState(false);
+
   useEffect(() => {
     if (auth.state.user) {
       setLoadingOrders(true);
-      if (orders.state.orders.length <= 0) {
-        orders.getOrders(auth.state.user.id);
-      }
-      if (orders.state.orders.length > 0) {
+
+      const fetchOrders = async () => {
+        if (orders.state.orders.length <= 0) {
+          await orders.getOrders(auth.state.user.id);
+        }
         setLoadingOrders(false);
-      }
+      };
+
+      fetchOrders();
     } else {
       modal.openModal(false);
     }
@@ -33,12 +37,12 @@ const DeliveryView = () => {
   };
 
   return (
-    <div>
+    <div style={{ minHeight: "65vh", display: "flex", flexDirection: "column" }}>
       {auth.state.user == null ? (
-        <DeliveryEmpty></DeliveryEmpty>
+        <DeliveryEmpty />
       ) : (
-        <div>
-          <div className="reload-orders">
+        <div style={{ flex: 1, paddingInline: "1rem", paddingTop: "2rem" }}>
+          <div className="reload-orders" style={{ textAlign: "right", marginBottom: "1rem" }}>
             <button
               className="btn-rounded"
               onClick={reloadOrders}
@@ -47,12 +51,34 @@ const DeliveryView = () => {
               Reload Orders
             </button>
           </div>
-          {(orders.state.orders.length > 0 &&
-            orders.state.orders.map((order) => {
-              return (
-                <DeliveryItem key={order._id} order={order}></DeliveryItem>
-              );
-            })) || <Skeleton height={500}></Skeleton>}
+
+          {loadingOrders ? (
+            <Skeleton height={500} />
+          ) : orders.state.orders.length > 0 ? (
+            orders.state.orders.map((order) => (
+              <DeliveryItem key={order._id} order={order} />
+            ))
+          ) : (
+            <div
+              style={{
+                padding: "3rem 1rem",
+                textAlign: "center",
+                color: "#666",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🧾</div>
+              <h2 style={{ fontWeight: "600", fontSize: "1.75rem", marginBottom: "0.5rem" }}>
+                No Orders Yet
+              </h2>
+              <p style={{ fontSize: "1rem", color: "#999" }}>
+                You haven't placed any orders yet. Once you do, they'll appear here.
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>
