@@ -1,46 +1,73 @@
 const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema;
-
-const ProductSchema = new Schema({
-    name: {
-        type: String,
-        required: [true, "Name field is required"],
-    },
-    description: {
-        type: String,
-        required: [true, "Description field is required"],
-    },
-    rating: {
-        type: Number,
-        default: 0,
-    },
-    price: {
-        type: Number,
-        required: [true, "Price field is required"],
-    },
-    price_before: {
-        type: Number,
-    },
-    times_bought: {
-        type: Number,
-        default: 0,
-    },
-    product_image: {
-        type: String,
-        required: false,
-    },
-    tags: {
-        type: String,
-        required: false,
-    },
+const reviewSchema = new mongoose.Schema({
+  user: {
+    type: String,
+    required: true
+  },
+  rating: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5
+  },
+  comment: {
+    type: String,
+    required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-ProductSchema.pre("save", function (next) {
-    this.price_before = this.price;
-    next();
+const productSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Name field is required"],
+  },
+  description: {
+    type: String,
+    required: [true, "Description field is required"],
+  },
+  rating: {
+    type: Number,
+    default: 0,
+  },
+  price: {
+    type: Number,
+    required: [true, "Price field is required"],
+  },
+  price_before: {
+    type: Number,
+  },
+  times_bought: {
+    type: Number,
+    default: 0,
+  },
+  product_image: {
+    type: String,
+  },
+  tags: {
+    type: String,
+  },
+  reviews: [reviewSchema]
 });
 
-const Product = mongoose.model("product", ProductSchema);
+productSchema.pre("save", function (next) {
+  this.price_before = this.price;
+  next();
+});
 
-module.exports = Product;
+// Method to update rating when new review is added
+productSchema.methods.updateRating = function() {
+  if (this.reviews.length === 0) {
+    this.rating = 0;
+    return;
+  }
+  
+  const sum = this.reviews.reduce((acc, review) => acc + review.rating, 0);
+  this.rating = sum / this.reviews.length;
+};
+
+module.exports = mongoose.model("Product", productSchema);
