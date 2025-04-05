@@ -17,7 +17,7 @@ const TopProducts = () => {
   const topThree = topProducts.slice(0, 3);
 
   const handleViewMore = () => {
-    navigate("/products-view", { state: { title: "Top Sellers", products: topProducts }, type : "Top" });
+    navigate("/products/view-all", { state: { title: "Top Sellers", products: topProducts }, type : "Top" });
   };
 
   return (

@@ -12,7 +12,7 @@ const Deals = () => {
   const topThreeDeals = dealProducts.slice(0, 3);
 
   const handleViewMore = () => {
-    navigate("/products-view", {
+    navigate("/products/view-all", {
       state: {
         title: "Deals Just For You!",
         products: dealProducts,
