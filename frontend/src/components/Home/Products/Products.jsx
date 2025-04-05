@@ -13,7 +13,7 @@ const Products = () => {
     .sort((a, b) => a.name.localeCompare(b.name));
   return (
     <div className="sub-container" id="products">
-      <h2>Headphones For You</h2>
+      <h2>Latest Deals</h2>
       {store.state.products.length > 0 ? (
         <div className="contains-product">
           {sortedProducts.map((product) => (

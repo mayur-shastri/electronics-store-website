@@ -12,9 +12,6 @@ function HomeView() {
           <Banner></Banner>
         </section>
         <section className="benefits-section"></section>
-        {/* <section className="filters-section">
-          <Filters></Filters>
-        </section> */}
         <section>
           <Benefits></Benefits>
         </section>

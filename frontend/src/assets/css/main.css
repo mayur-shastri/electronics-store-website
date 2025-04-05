@@ -8,7 +8,7 @@
 .btn-rounded {
   border-radius: 50px;
   background-color: #ffffff;
-  color: #fd8a15;
+  color: #9147ff; /* Twitch purple */
   border: none;
   padding: 1rem 2rem;
   font-weight: 900;
@@ -16,7 +16,7 @@
 }
 
 .btn-submit {
-  background-color: #fd8a15;
+  background-color: #9147ff; /* Twitch purple */
   color: #ffffff;
   border: none;
   padding: 1rem 2rem;
@@ -25,11 +25,11 @@
 
 header,
 footer {
-  background-color: #ff8b15;
+  background-color: #9147ff; /* Twitch purple */
 }
 
 .hero-section {
-  background-color: #ff8b15;
+  background-color: #9147ff; /* Twitch purple */
   padding: 1rem;
   margin-bottom: 1rem;
 }

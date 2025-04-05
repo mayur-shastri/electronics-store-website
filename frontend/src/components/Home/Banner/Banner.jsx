@@ -1,4 +1,4 @@
-import girlHeadphones from "@/assets/images/girl_headphones.png";
+import girlHeadphones from "@/assets/images/girl_headphones-1.png";
 import "./Banner.css";
 
 const Banner = () => {
@@ -7,7 +7,7 @@ const Banner = () => {
       <div className="banner">
         <div className="banner-text">
           <h1>
-            Grab upto 50% off on <br></br>many Products
+            Grab Upto 50% Off On <br></br>Many Deals
           </h1>
           <span className="is-buy-now">
             <a href="#products">

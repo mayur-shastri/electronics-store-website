@@ -20,10 +20,10 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 const corsConfig = {
-  credentials: true,
   origin: FRONTEND_URL,
+  credentials: true,
   sameSite: "none",
-  // secure: true, // uncomment in when using HTTPS
+  secure: true, // uncomment in when using HTTPS
 };
 app.use(cors(corsConfig));
 

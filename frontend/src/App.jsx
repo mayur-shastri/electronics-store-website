@@ -8,10 +8,11 @@ import DeliveryView from "./views/DeliveryView";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useEffect } from "react";
 import { useGlobalContext } from "./components/GlobalContext/GlobalContext";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import Modal from "./components/Modals/Modal";
 import CancelOrder from "./components/Modals/CancelOrder";
 import "react-toastify/dist/ReactToastify.css";
+import ProductDetailsView from "./views/ProductDetailsView";
 
 function App() {
   let { store } = useGlobalContext();
@@ -30,6 +31,7 @@ function App() {
           <Route path="/" element={<HomeView />} />
           <Route path="/cart" element={<CartView />} />
           <Route path="/delivery" element={<DeliveryView />} />
+          <Route path="/products/:id" element={<ProductDetailsView />} />
           <Route path="*" element={<ErrorView />} />
         </Routes>
         <footer>
