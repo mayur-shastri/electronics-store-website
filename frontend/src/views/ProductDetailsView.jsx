@@ -15,17 +15,18 @@ const ReviewForm = ({ review, setReview, handleReviewSubmit }) => {
         return <p className="login-warning">You must be logged in to leave a review.</p>;
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await handleReviewSubmit(e, {
+            ...review,
+            user: user.id,
+        });
+    };
+
     return (
         <div className="review-form">
             <h3>Add Your Review</h3>
-            <form
-                onSubmit={(e) =>
-                    handleReviewSubmit(e, {
-                        ...review,
-                        user: user._id,
-                    })
-                }
-            >
+            <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Rating</label>
                     <div className="star-rating">
@@ -33,7 +34,9 @@ const ReviewForm = ({ review, setReview, handleReviewSubmit }) => {
                             <FaStar
                                 key={i}
                                 className={i < review.rating ? "selected" : ""}
-                                onClick={() => setReview({ ...review, rating: i + 1 })}
+                                onClick={() =>
+                                    setReview({ ...review, rating: i + 1 })
+                                }
                             />
                         ))}
                     </div>
@@ -42,13 +45,18 @@ const ReviewForm = ({ review, setReview, handleReviewSubmit }) => {
                 <div className="form-group">
                     <label>Comment</label>
                     <textarea
+                        rows={5}
                         value={review.comment}
-                        onChange={(e) => setReview({ ...review, comment: e.target.value })}
+                        onChange={(e) =>
+                            setReview({ ...review, comment: e.target.value })
+                        }
                         required
                     />
                 </div>
 
-                <button type="submit" className="submit-review">Submit Review</button>
+                <button type="submit" className="submit-review">
+                    Submit Review
+                </button>
             </form>
         </div>
     );
@@ -85,13 +93,16 @@ const ProductDetailsView = () => {
     const handleReviewSubmit = async (e, reviewData) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}/reviews`, {
+            console.log(reviewData);
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/${product._id}/reviews`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(reviewData)
             });
+            console.log("SDLFKSDOIFJSDf");
+            console.log(response);
 
             if (!response.ok) {
                 throw new Error("Failed to post review");
@@ -102,7 +113,7 @@ const ProductDetailsView = () => {
             toast.success("Review submitted successfully!");
             setReview({ rating: 0, comment: "" });
         } catch (error) {
-            console.error("Error submitting review:", error);
+            console.error("Error submitting review:", error.message);
             toast.error("Failed to submit review");
         }
     };
@@ -130,9 +141,9 @@ const ProductDetailsView = () => {
 
                     <div className="price-rating">
                         <span className="price">${product.price.toFixed(2)}</span>
-                        {product.price_before && (
+                        {/* {product.price_before && (
                             <span className="price-before">${product.price_before.toFixed(2)}</span>
-                        )}
+                        )} */}
                         <div className="rating">
                             {[...Array(5)].map((_, i) => (
                                 <FaStar
@@ -192,14 +203,16 @@ const ProductDetailsView = () => {
                         <ul className="review-list">
                             {product.reviews.map((r, index) => (
                                 <li key={index} className="review-item">
-                                    <strong>{r.user}</strong>
+                                    <div className="review-header">
+                                        <strong className="review-username">{r.user}</strong>
+                                        <span className="review-date">{new Date(r.createdAt).toLocaleDateString()}</span>
+                                    </div>
                                     <div className="review-rating">
                                         {[...Array(5)].map((_, i) => (
                                             <FaStar key={i} className={i < r.rating ? 'filled' : 'empty'} />
                                         ))}
                                     </div>
-                                    <p>{r.comment}</p>
-                                    <small>{new Date(r.createdAt).toLocaleString()}</small>
+                                    <p className="review-comment">"{r.comment}"</p>
                                 </li>
                             ))}
                         </ul>

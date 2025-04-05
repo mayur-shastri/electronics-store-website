@@ -22,3 +22,59 @@ p {
     margin-top: 3rem;
     color: #777;
 }
+
+.product-reviews {
+    margin-top: 3rem;
+}
+
+.review-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+}
+
+.review-item {
+    padding: 1rem 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: #fdfdfd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.review-username {
+    font-weight: 600;
+    color: #333;
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.review-rating {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.review-rating .filled {
+    color: #f5a623;
+}
+
+.review-rating .empty {
+    color: #ddd;
+}
+
+.review-comment {
+    font-style: italic;
+    color: #444;
+    line-height: 1.4;
+}
