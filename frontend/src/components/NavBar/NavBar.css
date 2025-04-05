@@ -10,6 +10,8 @@
   align-items: center;
   min-height: 5rem;
   color: white;
+  background-color: #7c26fe;
+  padding-right: 1rem;
 }
 
 .links,
