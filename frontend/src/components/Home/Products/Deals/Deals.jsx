@@ -33,7 +33,7 @@ const Deals = () => {
           </div>
           {dealProducts.length > 3 && (
             <div style={{ textAlign: "center", marginTop: "1rem" }}>
-              <button onClick={handleViewMore} className="view-more-btn">
+              <button onClick={handleViewMore} className="btn-rounded">
                 View More
               </button>
             </div>

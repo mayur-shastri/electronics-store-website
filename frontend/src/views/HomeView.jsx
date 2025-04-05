@@ -11,17 +11,16 @@ function HomeView() {
         <section className="hero-section">
           <Banner></Banner>
         </section>
-        <section className="benefits-section"></section>
-        <section>
+        <section className="benefits-section">
           <Benefits></Benefits>
         </section>
         <section className="products-section">
           <Products></Products>
         </section>
-        <section className="deals">
+        <section className="products-section">
           <Deals></Deals>
         </section>
-        <section className="top-products">
+        <section className="products-section">
           <TopProducts></TopProducts>
         </section>
       </main>
